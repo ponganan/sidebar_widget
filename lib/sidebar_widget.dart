@@ -17,6 +17,11 @@ class SidebarWidget extends StatelessWidget {
         backgroundColor: Colors.blue.shade400,
       ),
       // have to add Draw properties for use sidebar
+      // this will automatic add drawer icon
+
+      //use endDrawer to set to right side
+      //endDrawer: NavigationDrawer(),
+
       drawer: NavigationDrawer(),
     );
   }
@@ -44,45 +49,46 @@ class NavigationDrawer extends StatelessWidget {
   //create custom widget1 with Container for Home menu
   Widget buildHeader(BuildContext context) => Material(
         color: Colors.green.shade500,
-        child: InkWell(
-          onTap: () {
-            //close navigation draw before go to next page
-            Navigator.pop(context);
+        child: Container(
+          // use for get some space
+          padding: EdgeInsets.only(
+              // use this code for get screen size value for each screen
+              top: 24 + MediaQuery.of(context).padding.top,
+              bottom: 24),
+          child: Column(
+            children: [
+              //use InkWell to detect tap on CircleAvatar
+              InkWell(
+                onTap: () {
+                  //close navigation draw before go to next page
+                  Navigator.pop(context);
 
-            // use to navigate to another page
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const UserPage()));
-          },
-          child: Container(
-            // use for get some space
-            padding: EdgeInsets.only(
-                // use this code for get screen size value for each screen
-                top: 24 + MediaQuery.of(context).padding.top,
-                bottom: 24),
-            child: Column(
-              children: const [
-                CircleAvatar(
+                  // use to navigate to another page
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const UserPage()));
+                },
+                child: const CircleAvatar(
                   radius: 50,
                   backgroundImage: NetworkImage(
                       'https://avatars.githubusercontent.com/u/13786915?v=4'),
                 ),
-                SizedBox(height: 10),
-                Text(
-                  'Ponganan Saensuk',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                'Ponganan Saensuk',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
-                SizedBox(height: 10),
-                Text(
-                  'Joey@gmail.com',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                'Joey@gmail.com',
+                style: TextStyle(
+                  color: Colors.white,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       );
